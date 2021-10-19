@@ -1,0 +1,76 @@
+#include <windows.h>
+#include "resource.h"
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Application.manifest"
+
+// Icons
+ICON_MAIN         ICON      "icon.ico"
+//ICON_SMALL        ICON      "icon.ico"
+//ICON_TRAY         ICON      "icon.ico"
+ICON_CLOSE        ICON      "x-icon.ico"
+
+// Strings
+
+STRINGTABLE
+{
+    STR_APP_TITLE           "Wallpaper Shuffle"
+    STR_TRAY_TIP            "Anfilt's Wallpaper Shuffle"
+    STR_APP_VERSION         VERSION_STR
+}
+
+// Accelerators
+/*
+IDC_SYSTRAYDEMO ACCELERATORS
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END*/
+
+// Menus
+
+MENU_TRAY MENU
+{
+    // Use a POPUP menu so the tray floats properly
+    POPUP "Tray Menu"
+    {
+        MENUITEM "Enable",      MENU_ITEM_ENABLE
+        MENUITEM "Disable",     MENU_ITEM_DISABLE
+        MENUITEM "Shuffle Now", MENU_ITEM_SHUFFLE
+        MENUITEM SEPARATOR
+        MENUITEM "Settings",    MENU_ITEM_SETTINGS
+        MENUITEM "E&xit",       MENU_ITEM_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&About ...",  MENU_ITEM_ABOUT
+    }
+}
+
+// Dialogs
+DIA_ABOUT DIALOGEX 0, 0, 186, 95
+STYLE DS_3DLOOK | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_CAPTION | WS_VISIBLE | WS_POPUP | WS_SYSMENU
+EXSTYLE WS_EX_WINDOWEDGE
+CAPTION "About"
+FONT 9, "SEGOE UI"
+{
+    ICON            ICON_MAIN, 65535, 15, 28, 0, 0, SS_ICON
+    LTEXT           "Developed By Anfilt", 0, 61, 47, 63, 9, SS_LEFT, WS_EX_LEFT
+    LTEXT           "Copyright (C) 2021", 0, 63, 37, 59, 9, SS_LEFT, WS_EX_LEFT
+    LTEXT           VERSION_STR, 0, 45, 27, 106, 9, SS_LEFT, WS_EX_LEFT
+    PUSHBUTTON      "OK", IDOK, 127, 72, 50, 14, 0
+}
+
+DIA_SETTING DIALOGEX 0, 0, 260, 113, 0
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | DS_FIXEDSYS | WS_POPUPWINDOW | WS_DLGFRAME
+CAPTION "Wallpaper Shuffle - Settings"
+FONT 9, "SEGOE UI"
+{
+    LTEXT            "Search Directory", 65535,    11,  6,   60,  9,  NOT WS_GROUP
+    EDITTEXT                             SRCH_TXT, 11,  17,  193, 12, WS_TABSTOP | WS_BORDER, WS_EX_CLIENTEDGE
+    PUSHBUTTON       "...",              SRCH_DIR, 210, 17,  40,  12, WS_TABSTOP
+    LTEXT            "Timer Frequency",  65535,    11,  36,  60,  9,  NOT WS_GROUP
+    EDITTEXT                             FREQ_TXT, 11,  46,  55,  12, WS_TABSTOP | ES_LEFT | ES_RIGHT | ES_NUMBER | WS_BORDER, WS_EX_CLIENTEDGE
+    COMBOBOX                             FREQ_UNI, 75,  46,  65,  78, WS_TABSTOP | WS_VSCROLL | CBS_DROPDOWNLIST
+    AUTOCHECKBOX     "Timer Enabled",    TIMER_ON, 11,  66,  55,  9,  WS_TABSTOP
+    AUTOCHECKBOX     "Run At Startup",   BOOT_ON,  11,  76,  55,  9,  WS_TABSTOP
+    PUSHBUTTON       "OK",               IDOK,     145, 95,  50,  12, WS_TABSTOP
+    PUSHBUTTON       "Cancel",           IDCANCEL, 200, 95,  50,  12, WS_TABSTOP
+}
