@@ -91,6 +91,9 @@ void set_wallpaper(TimerThread* data, WallpaperObj* wall) {
     len--; // we don't want the char '*'
     for(unsigned i = 0; i < wallpaper_obj_monitor_count(wall); i++) {
         wcharNode* random = wchar_list_remove_random_node(&file_list);
+        if(random == NULL) {
+            break;
+        }
         size_t    str_len = wcslen(random->name);
         size_t    needs   = sizeof(wchar_t) * (str_len + len + 1);
         if(bytes < needs) {
